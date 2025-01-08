@@ -1,12 +1,52 @@
-﻿<Window x:Class="OOP_Exam2025.MainWindow"
+﻿<Window x:Class="TicketBooking.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OOP_Exam2025"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        xmlns:local="clr-namespace:TicketBooking"
+        Title="Liam and Noel's Ticket Oasis" Height="488" Width="800">
+    <Window.Resources>
+        <!-- Converter for Placeholder Text Visibility -->
+        <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid Margin="10,10,10,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Search and Labels -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,10">
+            <Label Content="Events" VerticalAlignment="Center" Margin="0,0,10,0" RenderTransformOrigin="0.435,0.856" />
+            <Grid>
+                <!-- Search TextBox -->
+                <TextBox x:Name="SearchBox" Width="200" TextChanged="SearchBox_TextChanged" />
+                <!-- Placeholder Text -->
+                <TextBlock Text="Search"
+                           Foreground="Gray"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="5,0,0,0"
+                           IsHitTestVisible="False"
+                           Visibility="{Binding Text, ElementName=SearchBox, Converter={StaticResource StringToVisibilityConverter}}" />
+            </Grid>
+        </StackPanel>
+
+        <!-- Event ListBox -->
+        <ListBox x:Name="EventListBox" Grid.Row="1" Grid.Column="0" SelectionChanged="EventListBox_SelectionChanged" Margin="0,20,0,115" />
+
+        <!-- Ticket ListBox -->
+        <ListBox x:Name="TicketListBox" Grid.Row="1" Grid.Column="1" Margin="39,20,33,115" />
+
+        <!-- Booking Section -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right"/>
+        <Label Content="Tickets" Grid.Column="1" Margin="65,0,346,10" RenderTransformOrigin="0.507,0.516" />
+        <Label Content="Number of Tickets:" Grid.Column="1" Margin="37,317,311,0" Grid.Row="1" Height="32" VerticalAlignment="Top" RenderTransformOrigin="0.469,0.929" />
+        <TextBox x:Name="TicketQuantityTextBox" RenderTransformOrigin="0.313,0.104" Grid.Column="1" Margin="157,327,207,68" Grid.Row="1" />
+        <Button Content="Book" Click="BookButton_Click" RenderTransformOrigin="-0.39,-1.23" Grid.Column="1" Margin="298,322,128,68" Grid.Row="1" />
     </Grid>
 </Window>
